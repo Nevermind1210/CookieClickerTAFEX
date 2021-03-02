@@ -28,6 +28,10 @@ public class ListLoopsArgs : MonoBehaviour
             int index = cubes.IndexOf(cube);
             TextController textController = cube.GetComponent<TextController>();
             textController.SetText(names[index]);
+
+            //Makes a rainbow effect for the cubes
+            MeshRenderer rend = cube.GetComponent<MeshRenderer>();
+            rend.material.color = Color.HSVToRGB((float)index / (float)cubes.Count, 1, 1);
         }
     }
 

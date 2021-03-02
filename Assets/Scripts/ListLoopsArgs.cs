@@ -5,20 +5,29 @@ using UnityEngine;
 public class ListLoopsArgs : MonoBehaviour
 {
     [SerializeField]
-    private int cubeCount;
+    private string[] names;
     [SerializeField]
     private GameObject prefab;
     [SerializeField]
     private float spacing = 1.1f;
 
+    private List<GameObject> cubes = new List<GameObject>();
+
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < cubeCount; i++)
+        for (int i = 0; i < names.Length; i++)
         {
             Vector3 position = new Vector3(0, 0, i * spacing);
-            Instantiate(prefab, position, Quaternion.identity,transform);
+            cubes.Add(Instantiate(prefab, position, Quaternion.identity,transform));
+        }
+
+        foreach(GameObject cube in cubes)
+        {
+            int index = cubes.IndexOf(cube);
+            TextController textController = cube.GetComponent<TextController>();
+            textController.SetText(names[index]);
         }
     }
 
